@@ -1,0 +1,19 @@
+{
+  "hero": {
+    "title": "Welcome to AMU Service Request Management System",
+    "description": "Streamlining service requests for Arba Minch University staff and faculty with our digital solution.",
+    "cta_buttons": [
+      { "text": "Get Started", "link": "login.php", "type": "primary" },
+      { "text": "Learn More", "link": "#about", "type": "secondary" }
+    ]
+  },
+  "features": {
+    "title": "Key Features",
+    "description": "Discover how our system can transform your service request experience.",
+    "items": [
+      { "icon": "fas fa-bolt", "title": "Quick Submission", "description": "Submit service requests in just a few clicks from anywhere on campus." },
+      { "icon": "fas fa-chart-line", "title": "Real-time Tracking", "description": "Monitor the status of your requests with live updates and notifications." },
+      { "icon": "fas fa-tasks", "title": "Efficient Management", "description": "Administrators can easily assign and prioritize service requests." }
+    ]
+  }
+}

@@ -1,0 +1,156 @@
+/* Add responsive and improved styles for the Add User page */
+body {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-header img {
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.card-header h2 {
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-field {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.input-field:focus-within {
+    border-color: #2a2185;
+}
+
+.input-field i {
+    margin-right: 10px;
+    color: #888;
+}
+
+.input-field input,
+.input-field select {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 8px;
+    font-size: 1rem;
+    background-color: transparent;
+}
+
+.input-field input::placeholder {
+    color: #aaa;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #2a2185;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #1a1666;
+    transform: translateY(-2px);
+}
+
+.back-link {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #2a2185;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: #1a1666;
+    text-decoration: underline;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .card-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .back-link {
+        font-size: 0.8rem;
+    }
+}

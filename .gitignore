@@ -1,0 +1,9 @@
+.qodo
+
+# Local environment configuration
+/config.local.php
+
+# Local database dumps and backups may contain personal data or password hashes
+/backups/
+/srms_schema1.sql
+/AMU Main Campus SRMS .docx
