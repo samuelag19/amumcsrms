@@ -12,8 +12,8 @@ if (!isset($_SESSION['created'])) {
     $_SESSION['created'] = time();
 }
 
-// Redirect if not logged in as admin
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+// Administrators and superadmins can assign technicians.
+if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'] ?? null, ['admin', 'superadmin'], true)) {
     header("Location: login.php");
     exit;
 }
@@ -37,6 +37,10 @@ date_default_timezone_set('Africa/Addis_Ababa');
 
 // Initialize variables
 $section = isset($_GET['section']) ? $_GET['section'] : 'pending_requests';
+if ($_SESSION['role'] === 'superadmin' && $section !== 'assign_technicians') {
+    header("Location: superadmin_dashboard.php");
+    exit;
+}
 $message = '';
 $profile_message = '';
 $results = [];
@@ -48,8 +52,8 @@ $queries = [
     'manage_users' => "SELECT * FROM users WHERE role != 'superadmin' ORDER BY full_name",
     'pending_requests' => "SELECT sr.request_id, sr.category, sr.description, u.full_name AS requester, sr.created_at FROM service_requests sr LEFT JOIN users u ON sr.user_id = u.user_id WHERE sr.status = 'Pending' ORDER BY sr.created_at DESC",
     'assign_technicians' => [
-        "SELECT request_id, category, description FROM service_requests WHERE status = 'In Progress' AND assigned_to IS NULL",
-        "SELECT user_id, full_name FROM users WHERE role = 'technician'"
+        "SELECT request_id, category, description, created_at FROM service_requests WHERE status = 'Pending' AND assigned_to IS NULL ORDER BY created_at ASC",
+        "SELECT user_id, full_name FROM users WHERE role = 'technician' AND is_active = 1 ORDER BY full_name"
     ],
     'technician_workload' => "SELECT u.full_name, COUNT(sr.request_id) AS task_count 
                              FROM users u 
@@ -199,7 +203,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['request_id'], $_POST[
     }
     
     // Verify technician exists
-    $tech_check = $conn->prepare("SELECT user_id FROM users WHERE user_id = ? AND role = 'technician'");
+    $tech_check = $conn->prepare("SELECT user_id FROM users WHERE user_id = ? AND role = 'technician' AND is_active = 1");
     if ($tech_check) {
         $tech_check->bind_param("i", $technician_id);
         $tech_check->execute();

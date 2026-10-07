@@ -316,6 +316,10 @@ $notifications = $notifications_result->fetch_all(MYSQLI_ASSOC);
                 <i class="fas fa-users"></i>
                 <span>Manage Users</span>
             </a>
+            <a href="admin_dashboard.php?section=assign_technicians" class="menu-item">
+                <i class="fas fa-user-cog"></i>
+                <span>Assign Technicians</span>
+            </a>
             <a href="?section=audit_logs" class="menu-item <?= $section === 'audit_logs' ? 'active' : '' ?>">
                 <i class="fas fa-clipboard-list"></i>
                 <span>Audit Logs</span>
