@@ -26,5 +26,5 @@ $stmt->bind_param("i", $request_id);
 $stmt->execute();
 $stmt->close();
 $conn->close();
-header("Location: Admin_dashboard.php?section=assign_technicians");
+header("Location: admin_dashboard.php?section=assign_technicians");
 exit;

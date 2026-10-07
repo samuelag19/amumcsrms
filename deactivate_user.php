@@ -32,7 +32,7 @@ if ($stmt->affected_rows > 0) {
 $stmt->close();
 $conn->close();
 
-$redirect_url = ($_SESSION['role'] === 'superadmin') ? 'superadmin_dashboard.php?section=manage_users' : 'Admin_dashboard.php?section=manage_users';
+$redirect_url = ($_SESSION['role'] === 'superadmin') ? 'superadmin_dashboard.php?section=manage_users' : 'admin_dashboard.php?section=manage_users';
 header("Location: $redirect_url");
 exit;
 ?>

@@ -222,7 +222,7 @@ $conn->close();
         <?php
         // Redirect to respective dashboards based on user role
         if ($_SESSION['role'] === 'admin') {
-            $dashboard_url = 'Admin_dashboard.php';
+            $dashboard_url = 'admin_dashboard.php';
         } elseif ($_SESSION['role'] === 'technician') {
             $dashboard_url = 'technician_dashboard.php';
         } elseif ($_SESSION['role'] === 'staff') {

@@ -4,7 +4,15 @@ require_once __DIR__ . '/csrf.php';
 
 function db_connect(): mysqli
 {
-    $localConfigPath = dirname(__DIR__) . '/config.local.php';
+    $configuredConfigPath = getenv('SRMS_DB_CONFIG');
+    $localConfigPath = $configuredConfigPath !== false && $configuredConfigPath !== ''
+        ? $configuredConfigPath
+        : dirname(__DIR__) . '/config.local.php';
+
+    if ($configuredConfigPath !== false && $configuredConfigPath !== '' && !is_file($localConfigPath)) {
+        throw new RuntimeException('The file configured by SRMS_DB_CONFIG does not exist.');
+    }
+
     if (file_exists($localConfigPath)) {
         $config = require $localConfigPath;
     } else {

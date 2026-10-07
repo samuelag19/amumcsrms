@@ -119,7 +119,7 @@ if (!$result) {
         <?php else: ?>
             <p class="no-feedback">No feedback available at the moment.</p>
         <?php endif; ?>
-        <a href="Admin_dashboard.php" style="display: block; text-align: center; color: #2a2185; text-decoration: none; font-weight: bold;">Back to Dashboard</a>
+        <a href="admin_dashboard.php" style="display: block; text-align: center; color: #2a2185; text-decoration: none; font-weight: bold;">Back to Dashboard</a>
     </div>
 </body>
 </html>

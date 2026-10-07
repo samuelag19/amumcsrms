@@ -28,5 +28,5 @@ $stmt->bind_param("si", $reason, $request_id);
 $stmt->execute();
 $stmt->close();
 $conn->close();
-header("Location: Admin_dashboard.php");
+header("Location: admin_dashboard.php");
 exit;

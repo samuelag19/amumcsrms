@@ -137,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </button>
                 
                 <?php
-                $back_link = ($_SESSION['role'] === 'superadmin') ? 'superadmin_dashboard.php?section=manage_users' : 'Admin_dashboard.php?section=manage_users';
+                $back_link = ($_SESSION['role'] === 'superadmin') ? 'superadmin_dashboard.php?section=manage_users' : 'admin_dashboard.php?section=manage_users';
                 ?>
                 <a href="<?= $back_link ?>" class="back-link">
                     <i class="fas fa-arrow-left"></i> Back to Manage Users
