@@ -52,7 +52,7 @@ $queries = [
     'manage_users' => "SELECT * FROM users WHERE role != 'superadmin' ORDER BY full_name",
     'pending_requests' => "SELECT sr.request_id, sr.category, sr.description, u.full_name AS requester, sr.created_at FROM service_requests sr LEFT JOIN users u ON sr.user_id = u.user_id WHERE sr.status = 'Pending' ORDER BY sr.created_at DESC",
     'assign_technicians' => [
-        "SELECT request_id, category, description, created_at FROM service_requests WHERE status = 'Pending' AND assigned_to IS NULL ORDER BY created_at ASC",
+        "SELECT request_id, category, description, created_at FROM service_requests WHERE status IN ('Pending', 'In Progress') AND assigned_to IS NULL ORDER BY created_at ASC",
         "SELECT user_id, full_name FROM users WHERE role = 'technician' AND is_active = 1 ORDER BY full_name"
     ],
     'technician_workload' => "SELECT u.full_name, COUNT(sr.request_id) AS task_count 
@@ -213,7 +213,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['request_id'], $_POST[
             // Assign the request
             $stmt = $conn->prepare("UPDATE service_requests 
                                    SET assigned_to = ?, status = 'In Progress', updated_at = NOW() 
-                                   WHERE request_id = ? AND assigned_to IS NULL AND status = 'Pending'");
+                                   WHERE request_id = ? AND assigned_to IS NULL AND status IN ('Pending', 'In Progress')");
             if ($stmt) {
                 $stmt->bind_param("ii", $technician_id, $request_id);
                 
@@ -222,7 +222,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['request_id'], $_POST[
                         $message = "Request #$request_id assigned successfully!";
                         $results[0] = $conn->query($queries['assign_technicians'][0]);
                     } else {
-                        $message = "The request is no longer pending and unassigned.";
+                        $message = "The request is no longer unassigned or awaiting assignment.";
                     }
                 } else {
                     $message = "Error assigning request: " . $stmt->error;
